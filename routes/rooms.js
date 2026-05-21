@@ -6,8 +6,11 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const { search, amenities, minRate, maxRate, floor } = req.query;
+    const { search, amenities, minRate, maxRate, floor, owner } = req.query;
     const query = {};
+    if (owner) {
+      query.owner = owner;
+    }
     if (search) {
       query.name = { $regex: search, $options: 'i' };
     }
